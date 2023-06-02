@@ -42,7 +42,7 @@ export const getById = async (Id) => {
     const conn = await sql.connect(config);
     const results6 = await conn.request()
     .input("pId",sql.Int,Id)
-    .query("SELECT Pelicula.Imagen AS ImagenPelicula, Pelicula.Titulo AS TituloPelicula, Pelicula.FechaDeCreacion, Pelicula.Calificacion, Personaje.Imagen AS ImagenPersonaje, Personaje.Nombre AS NombrePersonaje, Personaje.Edad, Personaje.Peso, Personaje.Historia FROM PersonajeXPelicula INNER JOIN Personaje On Personaje.Id = PersonajeXPelicula.IdPersonaje INNER JOIN Pelicula ON Pelicula.Id = PersonajeXPelicula.IdPelicula  WHERE Personaje.Id = @pId") 
+    .query("SELECT Pelicula.*, String_AGG(Personaje.Nombre, ', ') FROM Pelicula LEFT JOIN PersonajeXPelicula ON Pelicula.Id = PersonajeXPelicula.IdPelicula LEFT JOIN Personaje ON PersonajeXPelicula.IdPersonaje = Personaje.Id WHERE Pelicula.Id = @pId GROUP BY Pelicula.Calificacion, Pelicula.FechaDeCreacion, Pelicula.Id, Pelicula.Imagen, Pelicula.Titulo ")
     return results6.recordset;  
 }
 
