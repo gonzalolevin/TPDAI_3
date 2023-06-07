@@ -50,6 +50,27 @@ export const getById = async (Id) => {
     return results6.recordset;  
 }
 
+//HAY QUE INCLUIR ESTO DENTRO DEL getAll
+//hay que hacer todos los ifs para que se puedan madnar solo algunos parametros
+//de esta forma, usando los or, si me mandan un personaje llamada "bob" y que pesa 30 kilos, me duelve todos los que se llaman bob y aparte todos los que pesan 30 kilos, no solo los que se llamen bob y pesesn 30 kilos.
+
+export const searchByName = async (personaje,pelicula) => {
+    const conn = await sql.connect(config);
+    const results6 = await conn.request()
+    .input ("pNombre",sql.VarChar,personaje.nombre)
+    .input ("pEdad",sql.Int,personaje.edad)
+    .input ("pPeso",sql.Int,personaje.peso)
+    .input ("pId",sql.Int,pelicula.Id)
+    .query(`SELECT Personaje.* 
+            FROM Personaje
+            INNER JOIN PersonajeXPelicula ON Personaje.Id = PersonajeXPelicula.IdPersonaje
+            INNER JOIN Pelicula ON PersonajeXPelicula.IdPelicula = Pelicula.Id
+            WHERE personaje.nombre = @pNombre or personaje.edad = @pEdad or personaje.peso = @pPeso or pelicula.Id = @pId
+          `)
+    return results6.recordset;  
+}
+
+
 /*
 console.log('This is a function on the service');
         const pool = await sql.connect(config);

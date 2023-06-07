@@ -1,7 +1,6 @@
 import {Router} from 'express';
-import express from "express"; //RARO
 import Personaje from '../Models/personaje.js';
-import { getAll, Create, Update, deleteById, getById } from "../services/personajeService.js";
+import { getAll, Create, Update, deleteById, getById, searchByName } from "../services/personajeService.js";
 const router = Router();
 
 
@@ -57,13 +56,24 @@ router.delete('/:id', async (req, res) =>{
 router.get('/:id', async (req,res) =>{ 
     const idElegido = req.params.id;
     const personajeElegido = await getById(idElegido);
-    if (idElegido<1) { //no anda
+    if (idElegido<1) { 
         return res.status(400);
     }
     if (idElegido == null) {
         return res.status(404);
     }
     return res.status(200).send(personajeElegido);
+})
+
+//HAY QUE INCLUIR ESTO DENTRO DEL getAll
+// 
+router.get('/:id', async (req,res) =>{ 
+    const personajes = await searchByName();
+    res.send('name' + req.query.name)
+    res.send('age' + req.query.age)
+    res.send('peso' + req.query.weight)
+    res.send('movies' + req.query.movies)
+
 })
 
 
