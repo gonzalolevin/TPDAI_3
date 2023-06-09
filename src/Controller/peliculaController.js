@@ -1,14 +1,15 @@
 import {Router} from 'express';
+import { Authenticate } from '../common/jwt.strategy.js';
 import Pelicula from '../Models/pelicula.js';
 import { getAll, Create, Update, deleteById, getById } from "../services/peliculaService.js";
 const router = Router();
 
-router.get('/', async (req,res)  =>{ //post = insert - put = update
+router.get('/', Authenticate, async (req,res)  =>{ //post = insert - put = update
     const todaspeliculas = await getAll();
     return res.status(200).send(todaspeliculas);
 })
 
-router.post('/', async (req,res) =>{
+router.post('/',Authenticate, async (req,res) =>{
     const PeliculaN = new Pelicula();
     PeliculaN.imagen = req.body.Imagen;
     PeliculaN.titulo = req.body.Titulo;
@@ -18,7 +19,7 @@ router.post('/', async (req,res) =>{
     return res.status(201).send(Crear);
 })
 
-router.put('/:id', async (req, res) =>{
+router.put('/:id',Authenticate, async (req, res) =>{
     const IdModificado = req.params.id;
     if (IdModificado != req.body.Id) {
        return res.status(400).send();
@@ -36,7 +37,7 @@ router.put('/:id', async (req, res) =>{
     return res.status(200).send(PeliculaModificada);
 })
 
-router.delete('/:id', async (req, res) =>{
+router.delete('/:id', Authenticate, async (req, res) =>{
     const idElegido = req.params.id;
     const rowsAffected = await deleteById(idElegido);
     
@@ -50,7 +51,7 @@ router.delete('/:id', async (req, res) =>{
     return res.status(200).send();
 })
 
-router.get('/:id', async (req,res) =>{ 
+router.get('/:id', Authenticate, async (req,res) =>{ 
     const idElegido = req.params.id;
     const peliculaElegida = await getById(idElegido);
     if (idElegido<1) { //no anda
