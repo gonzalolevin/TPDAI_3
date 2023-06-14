@@ -6,7 +6,7 @@ const router = Router();
 
 
 router.get('/', Authenticate, async (req,res)  =>{ 
-    const todospersonajes = await getAll();
+    const todospersonajes = await getAll(req.query.name, req.query.age, req.query.weight, req.query.movies);
     return res.status(200).send(todospersonajes);
 })
 

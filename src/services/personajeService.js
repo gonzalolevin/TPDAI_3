@@ -3,9 +3,59 @@ import sql from 'mssql';
 import config from '../Models/db.js';
 
 
-export const getAll = async () =>{
+export const getAll = async (name, age, weight, movies) =>{
     const conn = await sql.connect (config); // para conectar a la base de datos
-    const results = await conn.request().query ('SELECT Imagen, Nombre, Id FROM Personaje')
+    let query = 'SELECT Personaje.Imagen, Personaje.Nombre, Personaje.Id FROM Personaje INNER JOIN PersonajeXPelicula ON Personaje.Id = PersonajeXPelicula.IdPersonaje';
+    const params = {};
+    let isWhere = false
+
+    if(name != undefined)
+    {
+        query += ' WHERE Nombre = @name ';
+        params.name = name;
+        isWhere = true
+    }
+
+    if(age != undefined)
+    {
+        if(isWhere) {
+            query += ' AND Edad = @age ';
+
+        } else {
+            query += ' WHERE Edad = @age ';
+
+        }
+        params.age = age;
+    }
+
+    if(weight != undefined)
+    {
+        if(isWhere) {
+            query += ' AND Peso = @weight ';
+
+        } else {
+            query += ' WHERE Peso = @weight ';
+
+        }
+        params.weight = weight;
+
+    }
+
+    if(movies != undefined)
+    {
+        if(isWhere) {
+            query += ' AND PersonajeXPelicula.IdPelicula = @movies ';
+        } else {
+            query += ' WHERE PersonajeXPelicula.IdPelicula = @movies ';
+
+        }
+        params.movies = movies;
+    }
+    const results = await conn.request()
+    .input ("pNombre",sql.VarChar,name)
+    .input ("pEdad",sql.Int,age)
+    .input ("pPeso",sql.Int,weight)
+    .input ("pIdPelicula",sql.Int,movies)
     return results.recordset;
 }
 
@@ -46,7 +96,7 @@ export const getById = async (Id) => {
     const conn = await sql.connect(config);
     const results6 = await conn.request()
     .input("pId",sql.Int,Id)
-    .query("SELECT Personaje.*, STRING_AGG(Pelicula.Titulo, ',') FROM Personaje LEFT JOIN PersonajeXPelicula ON Personaje.Id = PersonajeXPelicula.IdPersonaje LEFT JOIN Pelicula ON PersonajeXPelicula.IdPelicula = Pelicula.Id WHERE Personaje.Id = @pId GROUP BY Personaje.Id,Personaje.Imagen,Personaje.Edad,Personaje.Historia, Personaje.Peso, Personaje.Nombre")
+    .query("SELECT Personaje.*, STRING_AGG(Pelicula.Titulo, ',') as PeliculaTitulo FROM Personaje LEFT JOIN PersonajeXPelicula ON Personaje.Id = PersonajeXPelicula.IdPersonaje LEFT JOIN Pelicula ON PersonajeXPelicula.IdPelicula = Pelicula.Id WHERE Personaje.Id = @pId GROUP BY Personaje.Id,Personaje.Imagen,Personaje.Edad,Personaje.Historia, Personaje.Peso, Personaje.Nombre")
     return results6.recordset;  
 }
 
@@ -64,7 +114,6 @@ export const searchByName = async (personaje,pelicula) => {
     .query(`SELECT Personaje.* 
             FROM Personaje
             INNER JOIN PersonajeXPelicula ON Personaje.Id = PersonajeXPelicula.IdPersonaje
-            INNER JOIN Pelicula ON PersonajeXPelicula.IdPelicula = Pelicula.Id
             WHERE personaje.nombre = @pNombre or personaje.edad = @pEdad or personaje.peso = @pPeso or pelicula.Id = @pId
           `)
     return results6.recordset;  
