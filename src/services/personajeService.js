@@ -6,7 +6,7 @@ import config from '../Models/db.js';
 export const getAll = async (name, age, weight, movies) =>{
     const conn = await sql.connect (config); // para conectar a la base de datos
     let query = 'SELECT Personaje.Imagen, Personaje.Nombre, Personaje.Id FROM Personaje INNER JOIN PersonajeXPelicula ON Personaje.Id = PersonajeXPelicula.IdPersonaje';
-    const params = {};
+    const params = {}; // ¿crea el objeto?
     let isWhere = false
 
     if(name != undefined)
@@ -23,6 +23,7 @@ export const getAll = async (name, age, weight, movies) =>{
 
         } else {
             query += ' WHERE Edad = @age ';
+            isWhere = true;
 
         }
         params.age = age;
@@ -35,10 +36,10 @@ export const getAll = async (name, age, weight, movies) =>{
 
         } else {
             query += ' WHERE Peso = @weight ';
+            isWhere = true;
 
         }
         params.weight = weight;
-
     }
 
     if(movies != undefined)
@@ -47,15 +48,19 @@ export const getAll = async (name, age, weight, movies) =>{
             query += ' AND PersonajeXPelicula.IdPelicula = @movies ';
         } else {
             query += ' WHERE PersonajeXPelicula.IdPelicula = @movies ';
+            isWhere = true;
 
         }
         params.movies = movies;
     }
-    const results = await conn.request()
-    .input ("pNombre",sql.VarChar,name)
-    .input ("pEdad",sql.Int,age)
-    .input ("pPeso",sql.Int,weight)
-    .input ("pIdPelicula",sql.Int,movies)
+    const results = await conn.request() 
+    // ¿Por qué los parametros van asi?
+    // qué es esto del input
+   .input ("name",sql.VarChar,name)
+   .input ("age",sql.Int,age)
+   .input ("weight",sql.Int,weight)
+   .input ("movies",sql.Int,movies)
+   .query(query, params)  
     return results.recordset;
 }
 
@@ -86,9 +91,9 @@ export const Update = async(Id,personaje)=>{
 
 export const deleteById = async (Id) => {
     const conn = await sql.connect(config);
-    const results5 = await conn.request()
-    .input("pId",sql.Int,Id).query('Delete from Personaje where Id = @pId')
-    return results5.rowsAffected; 
+    await conn.request().input ("pId", Id).query('Delete from PersonajeXPelicula where IdPersonaje = @pId')
+    const results5 = await conn.request().input ("pId",Id).query('Delete from Personaje where Id = @pId')
+    return results5.recordset; 
 }
 
 
@@ -104,36 +109,6 @@ export const getById = async (Id) => {
 //hay que hacer todos los ifs para que se puedan madnar solo algunos parametros
 //de esta forma, usando los or, si me mandan un personaje llamada "bob" y que pesa 30 kilos, me duelve todos los que se llaman bob y aparte todos los que pesan 30 kilos, no solo los que se llamen bob y pesesn 30 kilos.
 
-export const searchByName = async (personaje,pelicula) => {
-    const conn = await sql.connect(config);
-    const results6 = await conn.request()
-    .input ("pNombre",sql.VarChar,personaje.nombre)
-    .input ("pEdad",sql.Int,personaje.edad)
-    .input ("pPeso",sql.Int,personaje.peso)
-    .input ("pId",sql.Int,pelicula.Id)
-    .query(`SELECT Personaje.* 
-            FROM Personaje
-            INNER JOIN PersonajeXPelicula ON Personaje.Id = PersonajeXPelicula.IdPersonaje
-            WHERE personaje.nombre = @pNombre or personaje.edad = @pEdad or personaje.peso = @pPeso or pelicula.Id = @pId
-          `)
-    return results6.recordset;  
-}
 
 
-/*
-console.log('This is a function on the service');
-        const pool = await sql.connect(config);
-        const response = await pool.request()
-        .input('Id',sql.Int, id)
-        .query(`Select * FROM ${PersonajeTabla} WHERE Personaje.Id = @Id`);
-                
-        const pool2 = await sql.connect(config);
-        const response2 = await pool2.request()
-        .input('Id',sql.Int, id)
-        .query(`Select Pelicula.Titulo FROM Pelicula inner join PersonajesAsociados on PersonajesAsociados.FkPeliculas = Pelicula.Id WHERE PersonajesAsociados.FkPersonajes = @Id`);
 
-        console.log(response)
-        const personaje = response.recordset[0]
-        personaje.pelicula = response2.recordset;
-        return personaje;
-*/

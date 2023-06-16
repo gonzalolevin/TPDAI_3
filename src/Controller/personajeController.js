@@ -1,7 +1,7 @@
 import {Router} from 'express';
 import { Authenticate } from '../common/jwt.strategy.js';
 import Personaje from '../Models/personaje.js';
-import { getAll, Create, Update, deleteById, getById, searchByName } from "../services/personajeService.js";
+import { getAll, Create, Update, deleteById, getById } from "../services/personajeService.js";
 const router = Router();
 
 
@@ -47,7 +47,7 @@ router.delete('/:id', Authenticate, async (req, res) =>{
     if (idElegido<1) {
         return res.status(400).send();
     }
-    if (rowsAffected[0] == 0) {
+    if (rowsAffected == 0) {
         return res.status(404).send();
     }
 

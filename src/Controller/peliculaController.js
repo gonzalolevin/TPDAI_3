@@ -5,7 +5,7 @@ import { getAll, Create, Update, deleteById, getById } from "../services/pelicul
 const router = Router();
 
 router.get('/', Authenticate, async (req,res)  =>{ //post = insert - put = update
-    const todaspeliculas = await getAll();
+    const todaspeliculas = await getAll(req.query.name, req.query.order);
     return res.status(200).send(todaspeliculas);
 })
 
