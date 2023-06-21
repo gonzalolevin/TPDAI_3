@@ -67,7 +67,7 @@ router.get('/:id', Authenticate, async (req,res) =>{
 })
 
 //HAY QUE INCLUIR ESTO DENTRO DEL getAll
-// 
+/*
 router.get('/:id', Authenticate, async (req,res) =>{ 
     const personajes = await searchByName();
     res.send('name' + req.query.name)
@@ -76,6 +76,7 @@ router.get('/:id', Authenticate, async (req,res) =>{
     res.send('movies' + req.query.movies)
 
 })
+*/
 
 
 export default router;
