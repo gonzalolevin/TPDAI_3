@@ -1,8 +1,43 @@
-import {Router} from 'express';
+import { Router } from 'express';
 import { Authenticate } from '../common/jwt.strategy.js';
 import Pelicula from '../Models/pelicula.js';
-import { getAll, Create, Update, deleteById, getById } from "../services/peliculaService.js";
+import { getAll, Create, Update, deleteById, getById } from '../services/peliculaService.js';
+
 const router = Router();
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Pelicula:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *           description: El nombre de la pelicula.
+ *         order:
+ *           type: string
+ *           description: Ascendente o Descente según su fecha de creación
+ *       example:
+ *         name: Forrest Gump
+ *         order: ASC
+ */
+
+/**
+ * @swagger
+ * /movies:
+ *   get:
+ *     summary: Devuelve una lista de todas las peliculas.
+ *     responses:
+ *       '200':
+ *         description: La lista de peliculas.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Pelicula'
+ */
 
 router.get('/', Authenticate, async (req,res)  =>{ //post = insert - put = update
     const todaspeliculas = await getAll(req.query.name, req.query.order);

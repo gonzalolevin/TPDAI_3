@@ -5,7 +5,10 @@
     "jsonwebtoken": "^9.0.0",
     "mssql": "^9.1.1",
     "passport": "^0.6.0",
-    "passport-jwt": "^4.0.1"
+    "passport-jwt": "^4.0.1",
+    "swagger-decorator": "^0.0.22",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^4.6.3"
   },
   "name": "tp3",
   "version": "1.0.0",
