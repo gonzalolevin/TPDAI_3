@@ -11,16 +11,42 @@ const router = Router();
  *   schemas:
  *     Pelicula:
  *       type: object
+ *       required:
+ *         - imagen
+ *         - titulo
+ *         - fechaDeCreacion
+ *         - calificacion
  *       properties:
- *         name:
+ *         id:
+ *           type: integer
+ *           description: El ID de la pelicula.
+ *         imagen:
  *           type: string
- *           description: El nombre de la pelicula.
- *         order:
+ *           description: La imagen de la pelicula.
+ *         titulo:
  *           type: string
- *           description: Ascendente o Descente según su fecha de creación
+ *           description: El titulo de la pelicula.
+ *         fechaDeCreacion:
+ *           type: string
+ *           format: date
+ *           description: La fecha de creacion de la pelicula.
+ *         calificacion:
+ *           type: integer
+ *           description: La calificacion de la pelicula.
  *       example:
- *         name: Forrest Gump
- *         order: ASC
+ *         id: 2
+ *         imagen: https/imagen.com
+ *         titulo: Forrest Gump
+ *         fechaDeCreacion: '2001-10-10'
+ *         calificacion: 5
+ */
+
+
+/**
+ * @swagger
+ * tags:
+ *  name: Peliculas
+ *  description: La API de manejo de Peliculas
  */
 
 /**
@@ -28,6 +54,18 @@ const router = Router();
  * /movies:
  *   get:
  *     summary: Devuelve una lista de todas las peliculas.
+ *     tags: [Peliculas]
+ *     parameters:
+ *       - in: query
+ *         name: name
+ *         schema:
+ *           type: string
+ *         description: Nombre de la pelicula (opcional)
+ *       - in: query
+ *         name: order
+ *         schema:
+ *           type: string
+ *         description: Orden de clasificación (opcional)
  *     responses:
  *       '200':
  *         description: La lista de peliculas.
@@ -44,6 +82,28 @@ router.get('/', Authenticate, async (req,res)  =>{ //post = insert - put = updat
     return res.status(200).send(todaspeliculas);
 })
 
+/**
+ * @swagger
+ * /movies:
+ *   post:
+ *     summary: Crear una pelicula nueva.
+ *     tags: [Peliculas]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Pelicula'
+ *     responses:
+ *       '201':
+ *         description: La pelicula se creo de manera correcta.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Pelicula'
+ */
+
+
 router.post('/',Authenticate, async (req,res) =>{
     const PeliculaN = new Pelicula();
     PeliculaN.imagen = req.body.Imagen;
@@ -53,6 +113,39 @@ router.post('/',Authenticate, async (req,res) =>{
     const Crear = await Create(PeliculaN);
     return res.status(201).send(Crear);
 })
+
+/**
+ * @swagger
+ * /movies/{id}:
+ *   put:
+ *     summary: Actualizar una pelicula existente.
+ *     tags: [Peliculas]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: El ID de la pelicula.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Pelicula'
+ *     responses:
+ *       '200':
+ *         description: La pelicula fue actualizada.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Pelicula'
+ *       '400':
+ *         description: Los ID no coinciden.
+ *       '404':
+ *         description: No se encontro la pelicula solicitada.
+ */
+
 
 router.put('/:id',Authenticate, async (req, res) =>{
     const IdModificado = req.params.id;
@@ -72,6 +165,29 @@ router.put('/:id',Authenticate, async (req, res) =>{
     return res.status(200).send(PeliculaModificada);
 })
 
+/**
+ * @swagger
+ * /movies/{id}:
+ *   delete:
+ *     summary: Eliminar una pelicula segun su ID.
+ *     tags: [Peliculas]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: El ID de la pelicula.
+ *     responses:
+ *       '200':
+ *         description: La pelicula fue eliminada.
+ *       '400':
+ *         description: El ID es incorrecto.
+ *       '404':
+ *         description: El ID no fue encontrado.
+ */
+
+
 router.delete('/:id', Authenticate, async (req, res) =>{
     const idElegido = req.params.id;
     const rowsAffected = await deleteById(idElegido);
@@ -86,6 +202,31 @@ router.delete('/:id', Authenticate, async (req, res) =>{
     return res.status(200).send();
 })
 
+/**
+ * @swagger
+ * /movies/{id}:
+ *   get:
+ *     summary: Traer la pelicula por ID
+ *     tags: [Peliculas]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string 
+ *         required: true
+ *         description: El ID de la pelicula
+ *     responses:
+ *       200:
+ *         description: La informacion de la pelicula por ID
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Pelicula'
+ *       404:
+ *         description: La pelicula no se encontro
+ */
+
+
 router.get('/:id', Authenticate, async (req,res) =>{ 
     const idElegido = req.params.id;
     const peliculaElegida = await getById(idElegido);
@@ -97,5 +238,7 @@ router.get('/:id', Authenticate, async (req,res) =>{
     }
     return res.status(200).send(peliculaElegida);
 })
+
+
 
 export default router;

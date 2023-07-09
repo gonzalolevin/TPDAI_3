@@ -35,7 +35,12 @@ const options = {
   security: [{
     bearerAuth: []
   }],
-  apis: ['./src/Controller/*.js']
+  apis: [
+    './src/Controller/*.js',
+    './src/Controller/authentificationController.js' // Update the file name if necessary
+  ]
+  
+  
 };
 
 const specs = swaggerJSDoc(options);
