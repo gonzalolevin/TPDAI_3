@@ -1,5 +1,31 @@
-# TPDAI_3
+# Trabajo práctico de Personas y Peliculas
+## This project relates a table of Movies to its related Characters, allowing the users to interact with all the information that it provides.
+1. [ General Information. ](#desc)
+2. [ Installation. ](#installation)
 ***
+<a name="desc"></a>
+# General Information
+### What is the purpose of the project?
+This project was carried out within the framework of a school subject called "Development of information systems", in order for us to learn the process of developing an API, and using the Node.js and Express technologies.
+### What does the project do?
+This project exposes the information of many movies and their related characters, giving the user the opportunity to interact with this information in many ways, such as:
+- Getting an array with all the Movies/Characters and their related information.
+- Getting the information of a specific movie/character by its ID.
+- Posting a new movie/character to the database.
+- Updating an already existing movie/character to the database.
+- Deleting a movie/character from the database.
+- Filtering through all of the movies/characters to find the ones mathing with your specifications.
+### What technologies are used?
+The technologies used were mainly Node.js and Express.
+Node.js provides a powerful environment for building APIs, it offers several features that make it an excellent choice for API development.
+Express provides a minimalist framework for building APIs, making API development more straightforward with its features.
+***
+<a name="installation"></a>
+
+
+
+
+
 ¿Que teconologias uso?
 ¿Por qué las uso?
 
