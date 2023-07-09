@@ -3,7 +3,7 @@
 1. [ General Information ](#desc)
 2. [ Installation and running ](#installation)
 3. [ Usage ](#usage)
-4. [ Credits ](#creidts)
+4. [ Credits ](#credits)
 ***
 <a name="desc"></a>
 # General Information
