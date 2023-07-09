@@ -22,6 +22,12 @@ Express provides a minimalist framework for building APIs, making API developmen
 ***
 <a name="installation"></a>
 # Installation
+Here is a step by step guide on how to install the project and all the dependencies for it to run correctly.
+- Open a code editor of your choice.
+- Open the terminal and type in: ![carbon](https://github.com/gonzalolevin/TPDAI_3/assets/90118986/44fc2fcc-d522-4834-8d34-4056e0d40db7)
+- 
+
+- 
 
 
 
