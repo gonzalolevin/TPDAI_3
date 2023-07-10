@@ -92,12 +92,19 @@ You will appreciate that many endpoints can be tried out:
 ![DELETE](https://github.com/gonzalolevin/TPDAI_3/assets/90118986/6266f8c4-7f51-4a9b-af5d-0baa68bcefd2)
 ***
 <a name="authentication"></a>
-## Authentification
-You will need to use the bearer token authentification in order to try the endpoint.
-- Type in the following URL: localhost:3000/auth/login
-- Go to the Authorization part.
-- Select the Type "Bearer Token".
-- Insert the token recieved.
+## Authentication
+You will need to use bearer token authentication in order to access the endpoints. Follow these steps:
+
+1. Type in the following URL: `localhost:3000/auth/login`
+   ![Token](https://github.com/gonzalolevin/TPDAI_3/assets/90118986/d2e3ed7c-dc74-41f4-bcd8-79359f69e716)
+
+2. Go to the Authorization section.
+
+3. Select the Type "Bearer Token".
+   ![Bearer](https://github.com/gonzalolevin/TPDAI_3/assets/90118986/0f6b139e-0195-4ed5-ab85-e0fa13b71eeb)
+
+4. Insert the token received.
+   ![Insert](https://github.com/gonzalolevin/TPDAI_3/assets/90118986/a2384d19-deec-4885-bdb6-5323793ae6c7)
 
 ***
 <a name="swagger"></a>
@@ -106,6 +113,8 @@ Swagger helps users build, document, test and consume RESTful web services. You 
 If you want to use the swagger tool, you should run the code, as stated in the [ usage ](#usage) guide, and access the following link:
 #### [localhost:3000/api-docs](http://localhost:3000/api-docs)
 Then you should be able to try each individual point!
+<img width="931" alt="endpoint" src="https://github.com/gonzalolevin/TPDAI_3/assets/90118986/c3c0881a-d028-4a01-8552-d2e3548f252b">
+
 
 <a name="credits"></a>
 # Credits
