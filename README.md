@@ -61,14 +61,6 @@ You will use the following URL: localhost:3000/characters/
 #### While trying the movies endpoint
 You will use the following URL: localhost:3000/movies/
 
-<a name="authentication"></a>
-## Authentification
-You will need to use the bearer token authentification in order to try the endpoint.
-- Type in the following URL: localhost:3000/auth/login
-- Go to the Authorization part.
-- Select the Type "Bearer Token".
-- Insert the token recieved.
-
 ## Using each endpoint
 
 You will appreciate that many endpoints can be tried out:
@@ -98,6 +90,14 @@ You will appreciate that many endpoints can be tried out:
 * If you want to delete an already existing character or movie from the database, select the DELETE option, type the URL to your search, and include the ID of the character or movie you want to delete next to the final bar.
 
 ![DELETE](https://github.com/gonzalolevin/TPDAI_3/assets/90118986/6266f8c4-7f51-4a9b-af5d-0baa68bcefd2)
+***
+<a name="authentication"></a>
+## Authentification
+You will need to use the bearer token authentification in order to try the endpoint.
+- Type in the following URL: localhost:3000/auth/login
+- Go to the Authorization part.
+- Select the Type "Bearer Token".
+- Insert the token recieved.
 
 ***
 <a name="swagger"></a>
