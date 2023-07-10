@@ -34,11 +34,11 @@ const router = Router();
  *           type: integer
  *           description: La calificacion de la pelicula.
  *       example:
- *         id: 2
- *         imagen: https/imagen.com
- *         titulo: Forrest Gump
- *         fechaDeCreacion: '2001-10-10'
- *         calificacion: 5
+ *         Id: 2
+ *         Imagen: https/imagen.com
+ *         Titulo: Forrest Gump
+ *         FechaDeCreacion: '2001-10-10'
+ *         Falificacion: 5
  */
 
 

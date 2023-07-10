@@ -16,32 +16,30 @@ const options = {
       version: "1.0.0",
       description: "Trabajo numero tres de DAI"
     },
-    
     servers: [
       {
         url: "http://localhost:3000" // Update the URL to match your server configuration
       }
     ],
-  },
-  components: {
-    securitySchemes: {
-      bearerAuth: {
-        type: 'http',
-        scheme: 'bearer',
-        bearerFormat: 'JWT',
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        }
       }
-    }
+    },
+    security: [{
+      bearerAuth: []
+    }],
   },
-  security: [{
-    bearerAuth: []
-  }],
   apis: [
     './src/Controller/*.js',
     './src/Controller/authentificationController.js' // Update the file name if necessary
   ]
-  
-  
 };
+
 
 const specs = swaggerJSDoc(options);
 
