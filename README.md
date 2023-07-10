@@ -3,7 +3,10 @@
 1. [ General Information ](#desc)
 2. [ Installation and running ](#installation)
 3. [ Usage ](#usage)
-4. [ Credits ](#credits)
+4. [ Authentication ](#authentication)
+5. [ Swagger Documentation ](#swagger)
+6. [ Credits ](#credits)
+
 ***
 <a name="desc"></a>
 # General Information
@@ -58,6 +61,7 @@ You will use the following URL: localhost:3000/characters/
 #### While trying the movies endpoint
 You will use the following URL: localhost:3000/movies/
 
+<a name="authentication"></a>
 ## Authentification
 You will need to use the bearer token authentification in order to try the endpoint.
 - Type in the following URL: localhost:3000/auth/login
@@ -94,6 +98,14 @@ You will appreciate that many endpoints can be tried out:
 * If you want to delete an already existing character or movie from the database, select the DELETE option, type the URL to your search, and include the ID of the character or movie you want to delete next to the final bar.
 
 ![DELETE](https://github.com/gonzalolevin/TPDAI_3/assets/90118986/6266f8c4-7f51-4a9b-af5d-0baa68bcefd2)
+
+***
+<a name="swagger"></a>
+# Swagger Documentation
+Swagger helps users build, document, test and consume RESTful web services. You can either try the endpoint by using Postman or Swagger.
+If you want to use the swagger tool, you should run the code, as stated in the [ usage ](#usage) guide, and access the following link:
+#### [localhost:3000/api-docs](http://localhost:3000/api-docs)
+Then you should be able to try each individual point!
 
 <a name="credits"></a>
 # Credits
