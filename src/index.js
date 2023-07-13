@@ -22,6 +22,17 @@ const options = {
       }
     ],
     components: {
+      schemas: {
+        DataType: {
+          type: "object",
+          properties: {
+            token: {
+              type: "string",
+              description: "El token de autenticación."
+            }
+          }
+        }
+      },
       securitySchemes: {
         bearerAuth: {
           type: 'http',
@@ -40,7 +51,6 @@ const options = {
   ]
 };
 
-
 const specs = swaggerJSDoc(options);
 
 const app = express();
@@ -48,6 +58,7 @@ const port = 3000;
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 app.use(express.json());
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 const opt = {
   secretOrKey: process.env.AUTH_HS256_KEY,

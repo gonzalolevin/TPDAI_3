@@ -5,35 +5,20 @@ const router = Router();
 
 /**
  * @swagger
- * components:
- *   schemas:
- *     Autentificacion:
- *       type: object
- */
-
-
-/**
- * @swagger
- * tags:
- *  name: Autentificacion
- *  description: El token de autenticación.
- */
-
-/**
- * @swagger
- * /authentification:
+ * /auth/login:
  *   get:
- *     summary: Devuelve un bearer token para la autentificacion.
- *     tags: [Autentificacion]
+ *     tags:
+ *       - Autentificacion
+ *     summary: Devuelve un bearer token para la autenticacion.
+ *     description: El token de autenticación.
+ *     operationId: getAuthentification
  *     responses:
  *       '200':
  *         description: El token de autenticación.
  *         content:
  *           application/json:
  *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Pelicula'
+ *               $ref: '#/components/schemas/DataType'
  */
 
 
