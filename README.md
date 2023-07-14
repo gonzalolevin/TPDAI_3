@@ -33,15 +33,15 @@ Express provides a minimalist framework for building APIs, making API developmen
 - Open the folder TPDAI_3 in the code editor.
 ### Install the dependencies.
 - Type in the following line in the terminal "npm i", this will re-install to your computer all the dependencies that the project needs, such as the following:
-  - express
-  - dotenv
-  - mssql
-  - passport
-  - swagger-jsdoc
+  - <a href="https://expressjs.com/es/" target="_blank">express</a>
+  - <a href="https://www.npmjs.com/package/dotenv" target="_blank">dotenv</a>
+  - <a href="https://www.npmjs.com/package/mssql" target="_blank">mssql</a>
+  - <a href="https://www.npmjs.com/package/passport" target="_blank">passport</a>
+  - <a href="https://www.npmjs.com/package/swagger-jsdoc" target="_blank">swagger-jsdoc</a>
 - Go to the .env file and change the DB_SERVER to your devices's name.
 ### Open the database.
-- Open the SQL Server Management Studio.
-- Open the file called Disney.sql and Execute it. (This will load the database)
+- Open your favourite editor of databases.
+- Open the file called Disney.sql from the cloned folder and Execute it. (This will load the database)
 ### Run the project
 Type in the terminal "npm start" in order to execute the code.
 
@@ -57,9 +57,9 @@ The best way to try said functinalities is by using the Postamn application, whi
 ### Differentiation between movies and characters
 This projects consists of two different routes, one being movies and the other one being characters, each of them have their own endpoint, so the URL will differ one from another.
 #### While trying the characters endpoint
-You will use the following URL: localhost:3000/characters/
+You will use the following URL: http://localhost:3000/characters/
 #### While trying the movies endpoint
-You will use the following URL: localhost:3000/movies/
+You will use the following URL: http://localhost:3000/movies/
 
 ## Using each endpoint
 
@@ -95,7 +95,7 @@ You will appreciate that many endpoints can be tried out:
 ## Authentication
 You will need to use bearer token authentication in order to access the endpoints. Follow these steps:
 
-1. Type in the following URL: `localhost:3000/auth/login`
+1. Type in the following URL: `http://localhost:3000/auth/login`
    ![Token](https://github.com/gonzalolevin/TPDAI_3/assets/90118986/d2e3ed7c-dc74-41f4-bcd8-79359f69e716)
 
 2. Go to the Authorization section.
@@ -111,7 +111,7 @@ You will need to use bearer token authentication in order to access the endpoint
 # Swagger Documentation
 Swagger helps users build, document, test and consume RESTful web services. You can either try the endpoint by using Postman or Swagger.
 If you want to use the swagger tool, you should run the code, as stated in the [ usage ](#usage) guide, and access the following link:
-#### [localhost:3000/api-docs](http://localhost:3000/api-docs)
+#### [http://localhost:3000/api-docs](http://localhost:3000/api-docs)
 Then you should be able to try each individual point!
 <img width="931" alt="endpoint" src="https://github.com/gonzalolevin/TPDAI_3/assets/90118986/c3c0881a-d028-4a01-8552-d2e3548f252b">
 
